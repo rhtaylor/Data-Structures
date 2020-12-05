@@ -1,19 +1,25 @@
-class Node{
+class Vertex{
     constructor(data){
         this.data = data; 
-        this.next = null; 
+        this.adjacent = null; 
     } 
-    getNextNode(){
-        return this.next; 
+    getNextVertex(){
+        return this.adjacent; 
     } 
-    setNextNode(node){
-        if( node instanceof Node){ 
-            let current = this; 
-            let next = this.getNextNode(); 
-            while(!next === null){
-                current = current.getNextNode(); 
-            } current.next = node; 
-        }
+    setNextVertex(vertex){ 
+        let current = this; 
+        let nextV = this.adjacent; 
+        if(vertex instanceof Vertex){ 
+            if(!nextV){ 
+                this.adjacent = vertex; 
+            } else{ 
+                while(!nextV === null){  
+                current = current.getNextVertex(); 
+                nextV = current.adjacent 
+                } 
+               nextV.adjacent = vertex } 
+            } }
     }
-} 
+ 
+
 
