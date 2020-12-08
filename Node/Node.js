@@ -1,42 +1,44 @@
 class Vertex{
     constructor(data){
         this.data = data; 
-        this.next = null; 
-        this.pre = null; 
+        this.forward = null 
+        this.back = null; 
         this.up = null; 
-        this.down = null;   
+        this.down = null; 
+        this.left = null; 
+        this.right = null   
     } 
-    getNextVertex(){
-        return this.next; 
+    getForwardVertex(){
+        return this.forward; 
     } 
-    setNextVertex(vertex){ 
+    setForwardVertex(vertex){ 
         let current = this; 
-        let nextV = this.next; 
+        let forwardV = this.forward; 
         if(vertex instanceof Vertex){ 
-            if(!nextV){ 
-                this.next = vertex; 
+            if(!forwardV){ 
+                this.forward = vertex; 
             } else{ 
-                while(!nextV === null){  
-                current = current.getNextVertex(); 
-                nextV = current.next 
+                while(!forwardV === null){  
+                current = current.getForwardVertex(); 
+                forwardV = current.forward 
                 } 
-               nextV.next = vertex } 
+               forwardV.forward = vertex } 
             } }
-    getPreVertex(){
-        return this.pre
+    getbackVertex(){
+        return this.back
     }
     
-    setPreVertex(vertex){
+    setbackVertex(vertex){
         if(vertex instanceof Vertex){
             let current = this; 
-            let preVertex = current.pre; 
-                while(preVertex){ 
+            let backVertex = current.back; 
+                while(backVertex){ 
                 
-                current = current.getPreVertex(); 
-                preVertex = current.pre
+                current = current.getbackVertex(); 
+                backVertex = current.back
                 } 
             
-             current.pre = vertex
+             current.back = vertex
         }
     } 
 
@@ -68,7 +70,39 @@ class Vertex{
              } 
              current.down = vertex
          }
+    } 
+
+
+        getRightVertex(){
+        return this.right
+    } 
+         
+        setRightVertex(vertex){
+            if(vertex instanceof Vertex){
+                let current = this; 
+                let rightVertex = current.right; 
+                while(rightVertex){
+                    current = current.getRightVertex(); 
+                    rightVertex = current.right
+                } 
+                current.right = vertex
+            }
+        }
+    getLeftVertex(){
+            return this.left
+        }
+    setLeftVertex(vertex){
+        if(vertex instanceof Vertex){
+            let current = this; 
+            let leftVertex = current.left; 
+            while(leftVertex){
+                current = current.getLeftVertex(); 
+                leftVertex = current.left; 
+            } 
+            current.left = vertex
+        }
     }
+
         }
  
 
@@ -78,9 +112,16 @@ class Vertex{
  let third = new Vertex("Lady friend");
  let sky = new Vertex("flying") 
  let skyHigh = new Vertex("SUPER HIGH")
- randy.setNextVertex(candis) 
- randy.setPreVertex(third)
- 
+ let right = new Vertex("On your Right") 
+ let rightOfRight = new Vertex("On your RIGHT RIGHT")
+ let leftOfVertex = new Vertex("on your left")
+ let leftOfLeft = new Vertex("LEFT LEFT")
+ randy.setForwardVertex(candis) 
+ randy.setbackVertex(third)
  randy.setUpVertex(sky) 
  randy.setUpVertex(skyHigh) 
+ randy.setRightVertex(right) 
+ randy.setRightVertex(rightOfRight) 
+randy.setLeftVertex(leftOfVertex) 
+randy.setLeftVertex(leftOfLeft)
  console.log(randy)
