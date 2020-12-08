@@ -15,7 +15,11 @@ class Node:
         self.next = None  
         self.pre = None 
         self.up = None 
-        self.down = None
+        self.down = None 
+    def __setattr__(self, name, value): 
+            self.__dict__[name] = value 
+    def __getattr__(self, name): 
+            self.__dict__[name] 
     def get_next_node(self): 
         return self.next 
     def set_next_node(self, node):
@@ -55,6 +59,20 @@ class Node:
              current = current.get_down_node() 
         if(isinstance(node, Node)): 
             current.down = node
+    
+    @classmethod
+    def get_length_of(cls, list, way): 
+        print(list)
+        if (list is None):
+            return 0
+        elif list is not None:
+            
+            list = list.get(`way`) 
+            
+            return 1 + cls.get_length_of(list, way) 
+
+        
+
 
 building1 = Node("address 101") 
 building2 = Node("address 202")
@@ -67,11 +85,12 @@ building1.set_next_node(building3)
 building1.set_pre_node(building0) 
 building1.set_pre_node(buildingNeg) 
 building1.set_up_node(buildingPent) 
-print(building1.get_up_node().data) 
 buildingBasement = Node("address subGround") 
 building1.set_down_node(buildingBasement) 
-print(building1.down.data)
 
+
+x = Node.get_length_of(building1, building1.next) 
+print(x)
 #print(building1.next.data)
 # graph = Graph("Vertex", [[]]) 
 # graph.set_up_vertex(building1)
