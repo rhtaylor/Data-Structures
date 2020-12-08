@@ -1,5 +1,6 @@
 class Vertex{
-    constructor(data){
+    constructor(data){ 
+        
         this.data = data; 
         this.forward = null 
         this.back = null; 
@@ -7,10 +8,12 @@ class Vertex{
         this.down = null; 
         this.left = null; 
         this.right = null   
-    } 
+    }  
+    //gets forward vertex
     getForwardVertex(){
         return this.forward; 
     } 
+    //sets forward vertex
     setForwardVertex(vertex){ 
         let current = this; 
         let forwardV = this.forward; 
@@ -22,12 +25,13 @@ class Vertex{
                 current = current.getForwardVertex(); 
                 forwardV = current.forward 
                 } 
-               forwardV.forward = vertex } 
-            } }
+            forwardV.forward = vertex } 
+        } } 
+    //gets back vertex
     getbackVertex(){
         return this.back
     }
-    
+    //sets back vertex
     setbackVertex(vertex){
         if(vertex instanceof Vertex){
             let current = this; 
@@ -38,14 +42,14 @@ class Vertex{
                 backVertex = current.back
                 } 
             
-             current.back = vertex
+            current.back = vertex
         }
     } 
-
+    //gets up vertex
     getUpVertex(){
         return this.up
     }
-
+    //sets up vertex
     setUpVertex(vertex){
         if(vertex instanceof Vertex){
             let current = this 
@@ -54,43 +58,47 @@ class Vertex{
                 current = current.getUpVertex() 
                 upVertex = current.up
             } 
-            current.up = vertex
+        current.up = vertex
         }
     } 
+    //gets down vertex 
     getDownVertex(){
         return this.down
-    } 
+    }  
+    //sets down vertex
     setDownVertex(vertex){
-         if(vertex instanceof Vertex){
-             let current = this 
-             let downVertex = this.down 
+        if(vertex instanceof Vertex){
+            let current = this 
+            let downVertex = this.down 
              while(downVertex){
                  current = current.getDownVertex(); 
                  downVertex = current.down
              } 
-             current.down = vertex
+            current.down = vertex
          }
     } 
 
-
+        //gets right vertex
         getRightVertex(){
         return this.right
     } 
-         
-        setRightVertex(vertex){
-            if(vertex instanceof Vertex){
-                let current = this; 
-                let rightVertex = current.right; 
-                while(rightVertex){
-                    current = current.getRightVertex(); 
-                    rightVertex = current.right
+        //sets right vertex     
+    setRightVertex(vertex){
+        if(vertex instanceof Vertex){
+            let current = this; 
+            let rightVertex = current.right; 
+            while(rightVertex){
+                current = current.getRightVertex(); 
+                rightVertex = current.right
                 } 
-                current.right = vertex
-            }
+            current.right = vertex
         }
+    } 
+        //gets left vertex
     getLeftVertex(){
             return this.left
-        }
+        } 
+        //sets vertex left of current
     setLeftVertex(vertex){
         if(vertex instanceof Vertex){
             let current = this; 
@@ -102,9 +110,23 @@ class Vertex{
             current.left = vertex
         }
     }
-
-        }
- 
+    getArgVertex(dir){ 
+        return this[dir]
+    } 
+    setArgVertex(vertex,dir){ 
+        if(vertex instanceof Vertex){
+            let current = this 
+            let dirVertex = current[dir];  
+           
+            while(dirVertex !== null && dirVertex[dir] !==null){ 
+                dirVertex = dirVertex[dir]; 
+               } 
+            
+            dirVertex[dir] = vertex
+        
+    }
+}
+}
 
 
  let randy = new Vertex("Randy"); 
@@ -112,16 +134,11 @@ class Vertex{
  let third = new Vertex("Lady friend");
  let sky = new Vertex("flying") 
  let skyHigh = new Vertex("SUPER HIGH")
- let right = new Vertex("On your Right") 
- let rightOfRight = new Vertex("On your RIGHT RIGHT")
- let leftOfVertex = new Vertex("on your left")
- let leftOfLeft = new Vertex("LEFT LEFT")
- randy.setForwardVertex(candis) 
- randy.setbackVertex(third)
- randy.setUpVertex(sky) 
- randy.setUpVertex(skyHigh) 
- randy.setRightVertex(right) 
- randy.setRightVertex(rightOfRight) 
-randy.setLeftVertex(leftOfVertex) 
-randy.setLeftVertex(leftOfLeft)
+ let right = new Vertex("On your Right")  
+randy.setbackVertex(candis)
+let random = new Vertex("Random back") 
+let ramdom = new Vertex("BUT AERE YOU RANDOME???")
+randy.setArgVertex(random, "back")  
+randy.setArgVertex(ramdom, "back")
+
  console.log(randy)
