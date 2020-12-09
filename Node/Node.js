@@ -115,7 +115,12 @@ class Vertex{
     } 
     setArgVertex(vertex,dir){ 
         if(vertex instanceof Vertex){
-            let current = this 
+            let current = this  
+            if (current[dir] === null){ 
+                //this is if the list is empty 
+                return this[dir] = vertex
+            }
+            
             let dirVertex = current[dir];  
            
             while(dirVertex !== null && dirVertex[dir] !==null){ 
@@ -130,15 +135,60 @@ class Vertex{
 
 
  let randy = new Vertex("Randy"); 
- let candis = new Vertex("Candis");
- let third = new Vertex("Lady friend");
- let sky = new Vertex("flying") 
- let skyHigh = new Vertex("SUPER HIGH")
- let right = new Vertex("On your Right")  
-randy.setbackVertex(candis)
-let random = new Vertex("Random back") 
-let ramdom = new Vertex("BUT AERE YOU RANDOME???")
-randy.setArgVertex(random, "back")  
-randy.setArgVertex(ramdom, "back")
+//  let candis = new Vertex("Candis");
+//  let third = new Vertex("Lady friend");
+//  let sky = new Vertex("flying") 
+//  let skyHigh = new Vertex("SUPER HIGH")
+//  let right = new Vertex("On your Right")  
+// randy.setbackVertex(candis)
+// let random = new Vertex("Random back") 
+// let ramdom = new Vertex("BUT AERE YOU RANDOME???")
+// randy.setArgVertex(random, "back")  
+// randy.setArgVertex(ramdom, "back")
 
- console.log(randy)
+//  console.log(randy) 
+
+class Coordinate {
+    constructor() {
+        this.head = null 
+        this.matrix =
+        {
+            forward: [],
+            back: [],
+            up: [],
+            down: [],
+            left: [],
+            right: []
+        }
+    } 
+    getHead(){
+        return this.head
+    }
+    addHead(data, dir){
+        let newHead = new Vertex(data); 
+        let currentHead = this.head; 
+         newHead.setForwardVertex(currentHead); 
+        this.head = newHead
+    } 
+
+     addVertex(data, dir) { 
+         
+         let newVertex = new Vertex(data) 
+         
+        if (newVertex instanceof Vertex) { 
+            newVertex.setArgVertex(newVertex, dir)
+            return this.matrix[dir].push(1)
+        } 
+        
+    }
+    print(){
+        console.log(this.head)
+    }
+}  
+let c = new Coordinate(); 
+c.addVertex("Randy", "forward"); 
+c.addVertex("CANDIS", "forward");
+
+c.addHead("Randy") 
+c.addHead("Candis") 
+c.print()
