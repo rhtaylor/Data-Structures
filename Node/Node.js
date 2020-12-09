@@ -164,10 +164,10 @@ class Coordinate {
     getHead(){
         return this.head
     }
-    addHead(data, dir){
+    addNewHead(data, dir){
         let newHead = new Vertex(data); 
         let currentHead = this.head; 
-         newHead.setForwardVertex(currentHead); 
+        newHead.setArgVertex(currentHead, dir); 
         this.head = newHead
     } 
 
@@ -183,12 +183,31 @@ class Coordinate {
     }
     print(){
         console.log(this.head)
+    } 
+    clear(){
+        return this.head = null
+    } 
+    countInDir(dir){
+        let count = 0; 
+        let node = this.head; 
+       
+        while(node){ 
+            ++count;  
+            node = node[dir] 
+        } 
+        return count
     }
-}  
+}   
+
+
 let c = new Coordinate(); 
 c.addVertex("Randy", "forward"); 
 c.addVertex("CANDIS", "forward");
 
-c.addHead("Randy") 
-c.addHead("Candis") 
-c.print()
+c.addNewHead("Randy", "forward") 
+c.addNewHead("Candis", "forward")  
+c.addNewHead("YOLO", "forward") 
+
+c.print() 
+let x = c.countInDir("forward") 
+console.log(x)
