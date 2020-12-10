@@ -151,6 +151,7 @@ class Vertex{
 class Coordinate {
     constructor() {
         this.head = null 
+        this.vertices = [] 
         this.matrix =
         {
             forward: [],
@@ -171,13 +172,14 @@ class Coordinate {
         this.head = newHead
     } 
 
-     addVertex(data, dir) { 
+     addVertexInDir(data, dir) { 
          
          let newVertex = new Vertex(data) 
          
         if (newVertex instanceof Vertex) { 
-            newVertex.setArgVertex(newVertex, dir)
-            return this.matrix[dir].push(1)
+            this.head.setArgVertex(newVertex, dir)
+            this.matrix[dir].push(1); 
+            this.vertices[data] = newVertex 
         } 
         
     }
@@ -196,18 +198,42 @@ class Coordinate {
             node = node[dir] 
         } 
         return count
+    } 
+    countAllDir(){
+        const directions = ["forward", "back", "up", "down", "left", "right"] 
+        let count = 0 
+        let node = this.head
+        directions.map(way =>{ if(node[way] !== null || node[way] !== undefined){ 
+            ++count 
+            node = node[way]
+        }} ) 
+        console.log(count) 
+        return count
+    } 
+    printVertices(){ 
+        let keys = Object.keys(this.vertices) 
+        let head = "<head> "
+        keys.map(key => {
+            return head += this.vertices[key].data + " ";
+        } )  
+        head += " <tail>"   
+        console.log(head)
     }
+
 }   
 
 
 let c = new Coordinate(); 
-c.addVertex("Randy", "forward"); 
-c.addVertex("CANDIS", "forward");
+c.addNewHead("Randy", "up") 
+c.addVertexInDir("Randy", "forward"); 
+c.addVertexInDir("CANDIS", "forward");
+c.printVertices()
+// c.addNewHead("Randy", "forward") 
+// c.addNewHead("Candis", "forward")  
+// c.addNewHead("YOLO", "forward") 
+// c.addNewHead("DUDE", "back") 
+// c.addNewHead("WOW", "up")
 
-c.addNewHead("Randy", "forward") 
-c.addNewHead("Candis", "forward")  
-c.addNewHead("YOLO", "forward") 
-
-c.print() 
-let x = c.countInDir("forward") 
-console.log(x)
+// c.print() 
+// let x = c.countAllDir() 
+// console.log(x)
