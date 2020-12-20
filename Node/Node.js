@@ -151,7 +151,7 @@ class Vertex{
 class Coordinate {
     constructor() {
         this.head = null 
-        this.vertices = [] 
+        this.vertices = {} 
         this.matrix =
         {
             forward: [],
@@ -199,7 +199,8 @@ class Coordinate {
         } 
         return count
     } 
-    countAllDir(){
+    countAllDir(){ 
+        //still working on not fxnl
         const directions = ["forward", "back", "up", "down", "left", "right"] 
         let count = 0 
         let node = this.head
@@ -218,6 +219,13 @@ class Coordinate {
         } )  
         head += " <tail>"   
         console.log(head)
+    } 
+    findByNameKey(key){
+        let verticesObj = this.vertices 
+        return verticesObj[key].data
+    } 
+    printStorageObj(){
+        console.log(this.vertices)
     }
 
 }   
@@ -226,8 +234,10 @@ class Coordinate {
 let c = new Coordinate(); 
 c.addNewHead("Randy", "up") 
 c.addVertexInDir("Randy", "forward"); 
-c.addVertexInDir("CANDIS", "forward");
-c.printVertices()
+c.addVertexInDir("CANDIS", "forward"); 
+c.addVertexInDir("Adam", 'forward')
+//console.log(c.findByNameKey("CANDIS")) 
+c.printStorageObj()
 // c.addNewHead("Randy", "forward") 
 // c.addNewHead("Candis", "forward")  
 // c.addNewHead("YOLO", "forward") 
